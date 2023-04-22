@@ -378,7 +378,7 @@ if __name__ == "__main__":
             summary, reviews = get_review_list(bookId)
             bookmark_list.extend(reviews)
             bookmark_list = sorted(bookmark_list, key=lambda x: (
-                x.get("chapterUid", 1), 0 if x.get("range") == "" else int(x.get("range").split("-")[0])))
+                x.get("chapterUid", 1), 0 if not x.get("range") else int(x.get("range").split("-")[0])))
             children = get_children(chapter, summary, bookmark_list)
             id = insert_to_notion(title, bookId, cover, sort, author)
             add_blocks(id, children)
